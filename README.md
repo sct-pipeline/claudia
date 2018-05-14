@@ -19,7 +19,7 @@ data
 ## Getting started
 
 - Edit parameters.sh according to your needs.
-- Manual Labeling: here, you need to manually click at the posterior tip of two inter-vertebral discs. The discs are indicated on the left of the window. For example, label 3 corresponds to disc C2-C3
+- Manual Labeling:
   ./run_process.sh 1_label_data.sh
 - Process data:
   ./run_process.sh 2_process_data.sh
@@ -31,3 +31,4 @@ data
 
 This pipeline has been tested on SCT v3.1.2:
 https://github.com/neuropoly/spinalcordtoolbox/releases/tag/v3.1.2
+
