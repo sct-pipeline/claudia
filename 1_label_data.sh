@@ -12,10 +12,10 @@
 cd t2_sag_cerv
 # set common orientation: AIL
 sct_image -i t2_sag_cerv.nii.gz -setorient AIL -o t2_sag_cerv.nii.gz
-# create Ponto-Medullary junction (50), top of C1 (1) and cervical cord disc labels.
+# create Ponto-Medullary junction (50), top of C1 (1) and cervical cord disc labels, from C2-C3 to C7-T1.
 # For instance, label 3 refers to C2-C3 disc.
 # Please create the labels on the posterior edge of the intervertebral discs.
-sct_label_utils -i t2_sag_cerv.nii.gz -create-viewer 50,1,2,3,4,5,6,7,8 -o label_discs.nii.gz
+sct_label_utils -i t2_sag_cerv.nii.gz -create-viewer 50,1,3,4,5,6,7,8 -o label_discs.nii.gz
 cd ..
 
 # t2_sag_thor
