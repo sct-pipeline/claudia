@@ -1,6 +1,6 @@
 # claudia
 
-Pipeline for computing:
+Pipeline for computing cord morphometry measures across the cervical, thoracic and lumbar levels. The following metrics are output:
 - Total spinal cord volume (mm3)
 - CSA profile along the cord (per vertebral level)
 - The anterior-to-posterior and left-to-right diameters per vertebral level 
