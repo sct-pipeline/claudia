@@ -28,24 +28,19 @@ data
 ## How to run
 
 - Download (or `git clone`) this repository.
-- Edit parameters.sh according to your needs.
-
-- Manual Labeling:
-
-```./run_process.sh 1_label_data.sh```
-
---> Create the intervertebral disc labels in the spinal cord, at the level of the mid-vertebral body. For instance, label 3 refers to C2-C3 disc.
-
-- Process data:
-
-```./run_process.sh 2_process_data.sh```
-
---> Check the results of the automatic segmentation and correct it if needed.
-
-- Compute metrics:
-
-```./run_process.sh 3_compute_metrics.sh```
-
+- Edit [parameters.sh](./parameters.sh) according to your needs, then save the file.
+- **Manual Labeling:** Click at the posterior tip of inter-vertebral discs. The disc numbers are indicated on the left of the window. For example, label 3 corresponds to disc C2-C3.
+~~~
+./run_process.sh 1_label_data.sh
+~~~
+- **Process data:** Does most of the processing (automatic). Once completed, check results of the automatic segmentations by opening the quality control (QC) report under `${PATH_QC}/index.html`, and correct the segmentation if needed. To correct a segmentation, open it using e.g. fsleyes, edit the binary mask, then save it by adding the suffix `_manual`. E.g. `t2_seg.nii.gz` --> `t2_seg_manual.nii.gz`.
+~~~
+./run_process.sh 2_process_data.sh
+~~~
+- **Compute metrics:** Extract quantitative metrics (automatic).
+~~~
+./run_process.sh 3_compute_metrics.sh
+~~~
 
 ## Contributors
 
