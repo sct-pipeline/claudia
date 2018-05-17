@@ -36,6 +36,6 @@ cd t2_sag_lumb
 sct_image -i t2_sag_lumb.nii.gz -setorient AIL -o t2_sag_lumb.nii.gz
 # create lumbar cord disc labels, from T12-L1 (20) to L5-S1 (25)
 # For instance, label 21 refers to L1-L2 disc.
-# Please create the labels on the posterior edge of the intervertebral discs.
+# Please create the labels in the spinal cord, at the level of the mid-vertebral body.
 sct_label_utils -i t2_sag_lumb.nii.gz -create-viewer 20,21,22,23,24,25 -o label_discs.nii.gz
 cd ..
