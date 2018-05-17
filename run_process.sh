@@ -27,6 +27,7 @@ for subject in ${SUBJECTS[@]}; do
   echo "Processing subject: ${subject}"
   # go to subject folder
   cd ${PATH_DATA}${subject}
+  export SUBJECT=${subject}
   # run process
   $PATH_PROCESS ${subject}
 done

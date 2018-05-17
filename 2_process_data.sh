@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# This script segment data.
+# This script segments data.
 #
 # NB: add the flag "-x" after "!/bin/bash" for full verbose of commands.
 # Charley Gros 2018-05-13

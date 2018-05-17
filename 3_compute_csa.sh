@@ -1,12 +1,10 @@
 #!/bin/bash
 #
-# This script extract metrics.
+# This script computes metrics.
 #
 # NB: add the flag "-x" after "!/bin/bash" for full verbose of commands.
 # Charley Gros 2018-05-13
- 
-mkdir ${PATH_RESULTS}
- 
+  
 # t2_sag_cerv
 # ===========================================================================================
 cd t2_sag_cerv
@@ -63,3 +61,12 @@ sct_process_segmentation -i ${file_seg} -p csa -ofolder metrics -vertfile ${file
 sct_process_segmentation -i ${file_seg} -p shape -ofolder metrics
 # Go back to root folder
 cd ..
+
+
+mkdir ${PATH_RESULTS}
+
+# Compute metrics across the entire spinal cord
+# ===========================================================================================
+cd ${PATH_SCRIPTS}
+source sct_launcher
+python metrics.py ${PATH_DATA} ${SUBJECT} ${PATH_RESULTS}
