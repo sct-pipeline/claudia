@@ -14,3 +14,6 @@ export PATH_QC="/Volumes/projects/ms_seg/claudia/quality_control/"
  
 # results folder  (add "/"" at the end)
 export PATH_RESULTS="/Volumes/projects/ms_seg/claudia/results/"
+
+# path to scripts (add "/" at the end)
+export PATH_SCRIPTS="/Users/chgroc/code/claudia_berlin/git/claudia/"
