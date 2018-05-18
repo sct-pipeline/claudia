@@ -41,8 +41,9 @@ data
 ~~~
 ./run_process.sh 3_compute_metrics.sh
 ~~~
+
 - The outputs are:
-  - **total_volume_cord.csv**: each row corresponds to a subject
+  - **total_volume_cord.csv**: each row corresponds to a subject
   - **subject_001_folder/**: containing plots (.png) and a csv with the values per slice and vertebral level
 
 ## Contributors
