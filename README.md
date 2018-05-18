@@ -29,7 +29,7 @@ data
 
 - Download (or `git clone`) this repository.
 - Edit [parameters.sh](./parameters.sh) according to your needs, then save the file.
-- **Manual Labeling:** Click in the spinal cord, at the level of the mid-vertebral body. The disc numbers are indicated on the left of the window. For example, label 3 corresponds to disc C2-C3.
+- **Manual Labeling:** Click in the spinal cord, at the level of the mid-vertebral body. The disc numbers are indicated on the left of the window. For example, label 3 corresponds to disc C2-C3. Also see [this example](labeling.png). 
 ~~~
 ./run_process.sh 1_label_data.sh
 ~~~
