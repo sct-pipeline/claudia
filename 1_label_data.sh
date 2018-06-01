@@ -5,7 +5,7 @@
 #
 # NB: add the flag "-x" after "!/bin/bash" for full verbose of commands.
 # Charley Gros 2018-05-13
- 
+# Modified: 2018-06-01
  
 # t2_sag_cerv
 # ===========================================================================================
@@ -37,6 +37,5 @@ sct_image -i t2_sag_lumb.nii.gz -setorient AIL -o t2_sag_lumb.nii.gz
 # create lumbar cord disc labels, from T12-L1 (20) to L5-S1 (25)
 # For instance, label 21 refers to L1-L2 disc.
 echo "Please create the labels in the spinal cord, at the level of the mid-vertebral body."
-echo "Label 100 refers to the conus."
-sct_label_utils -i t2_sag_lumb.nii.gz -create-viewer 20,21,22,23,24,25,100 -o label_discs.nii.gz
+sct_label_utils -i t2_sag_lumb.nii.gz -create-viewer 20,21,22,23,24,25 -o label_discs.nii.gz
 cd ..
