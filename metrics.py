@@ -34,11 +34,14 @@ def total_volume_cord(path_subject, subject_id, section_folder_name_lst, output_
     for section_folder_name in section_folder_name_lst:
         volume_pkl = os.path.join(path_subject, section_folder_name, 'metrics', 'csa_volume.pickle')
         tvc += pd.read_pickle(volume_pkl)['MEAN across slices']
+    cvc = pd.read_pickle(os.path.join(path_subject, section_folder_name_lst[0], 'metrics', 'csa_volume.pickle'))['MEAN across slices']
 
     # if the subject already in the output_fname file, the value is updated, otherwise the new subject is appended
+    print subject_id, tvc_pd[tvc_pd['subject_id'] == subject_id].index[0]
     idx_pd = len(tvc_pd.index) if subject_id not in tvc_pd['subject_id'].values else tvc_pd[tvc_pd['subject_id'] == subject_id].index[0]
     tvc_pd.loc[idx_pd, 'subject_id'] = subject_id
     tvc_pd.loc[idx_pd, 'total_volume_cord'] = tvc
+    tvc_pd.loc[idx_pd, 'cervical_volume_cord'] = cvc
     tvc_pd.to_csv(output_fname)
 
 
@@ -138,31 +141,31 @@ def run_main(path_data_folder, subject_id, path_results_folder):
     total_volume_cord_csv_filename = os.path.join(path_results_folder, '_total_volume_cord.csv')
     total_volume_cord(path_subject=path_subject_folder,
                       subject_id=subject_id.split('/')[0],
-                      section_folder_name_lst=[cord_section_dct[section]['folder_name'] for section in cord_section_dct],
+                      section_folder_name_lst=[cord_section_dct[section]['folder_name'] for section in cord_section_sorted_lst],
                       output_fname=total_volume_cord_csv_filename)
 
-    path_subject_result_folder = path_results_folder + subject_id
-    if not os.path.isdir(path_subject_result_folder):
-        os.makedirs(path_subject_result_folder)
+    # path_subject_result_folder = path_results_folder + subject_id
+    # if not os.path.isdir(path_subject_result_folder):
+    #     os.makedirs(path_subject_result_folder)
 
-    metric_dct = {'csa': [0, 100], 'RL_diameter': [0, 30], 'AP_diameter': [0, 20], 'ratio_minor_major': [0, 1]}
-    shape_pd = pd.DataFrame.from_dict({})
-    for metric in metric_dct:
-        profile_filename = path_subject_result_folder + metric + '_profile.png'
-        profile_pd = metric_profile(path_subject=path_subject_folder,
-                                        subject_id=subject_id,
-                                        vert_info_dct=cord_section_dct,
-                                        section_lst=cord_section_sorted_lst,
-                                        output_fname=profile_filename,
-                                        metric_name=metric,
-                                        y_lim_lst=metric_dct[metric])
-        if shape_pd.empty:
-            shape_pd = profile_pd
-        else:
-            shape_pd = pd.concat([shape_pd, profile_pd[metric]], axis=1)
+    # metric_dct = {'csa': [0, 100], 'RL_diameter': [0, 30], 'AP_diameter': [0, 20], 'ratio_minor_major': [0, 1]}
+    # shape_pd = pd.DataFrame.from_dict({})
+    # for metric in metric_dct:
+    #     profile_filename = path_subject_result_folder + metric + '_profile.png'
+    #     profile_pd = metric_profile(path_subject=path_subject_folder,
+    #                                     subject_id=subject_id,
+    #                                     vert_info_dct=cord_section_dct,
+    #                                     section_lst=cord_section_sorted_lst,
+    #                                     output_fname=profile_filename,
+    #                                     metric_name=metric,
+    #                                     y_lim_lst=metric_dct[metric])
+    #     if shape_pd.empty:
+    #         shape_pd = profile_pd
+    #     else:
+    #         shape_pd = pd.concat([shape_pd, profile_pd[metric]], axis=1)
 
-    shape_csv_filename = path_subject_result_folder + '_shape.csv'
-    shape_pd.to_csv(shape_csv_filename)
+    # shape_csv_filename = path_subject_result_folder + '_shape.csv'
+    # shape_pd.to_csv(shape_csv_filename)
 
 
 if __name__ == '__main__':
