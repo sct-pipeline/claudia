@@ -41,7 +41,7 @@ def total_volume_cord(path_subject, subject_id, section_folder_name_lst, output_
     idx_pd = len(tvc_pd.index) if subject_id not in tvc_pd['subject_id'].values else tvc_pd[tvc_pd['subject_id'] == subject_id].index[0]
     tvc_pd.loc[idx_pd, 'subject_id'] = subject_id
     tvc_pd.loc[idx_pd, 'total_volume_cord'] = tvc
-    tvc_pd.loc[idx_pd, 'cervical_volume_cord'] = cvc
+    tvc_pd.loc[idx_pd, 'cervical_cord_volume'] = cvc
     tvc_pd.to_csv(output_fname)
 
 
@@ -95,7 +95,7 @@ def metric_profile(path_subject, subject_id, vert_info_dct, section_lst, output_
                                                 file_prefixe=section_folder_name + seg_suffixe.split('_labeled')[0])
 
         # loop over the vertebral levels in the current cord section
-        for vert_label in vert_info_dct[section]['vert_label']:
+        for vert_label in vert_info_dct[section]['vert_label'][:-1]:
             idx_vert_section = vert_label - min(vert_info_dct[section]['vert_label']) + 1
             z_vert_lst = sorted(list(set(np.where(labeled_seg_data == vert_label)[1])))[::-1]
             metric_slice_pd = raw_csv_pd[raw_csv_pd['raw_z'].isin(z_vert_lst)][['raw_metric', 'raw_z']]
@@ -133,9 +133,13 @@ def metric_profile(path_subject, subject_id, vert_info_dct, section_lst, output_
 def run_main(path_data_folder, subject_id, path_results_folder):
     path_subject_folder = os.path.join(path_data_folder, subject_id)
 
-    cord_section_dct = {'cervical': {'folder_name': 't2_sag_cerv', 'vert_label': range(1,8), 'vert_section_initial': 'C'},
-                        'thoracic': {'folder_name': 't2_sag_thor', 'vert_label': range(8,20), 'vert_section_initial': 'T'},
-                        'lumbar': {'folder_name': 't2_sag_lumb', 'vert_label': range(20,25), 'vert_section_initial': 'L'}}
+    cord_section_dct = {'cervical': {'folder_name': 't2_sag_cerv', 'vert_section_initial': 'C'},
+                        'thoracic': {'folder_name': 't2_sag_thor', 'vert_section_initial': 'T'},
+                        'lumbar': {'folder_name': 't2_sag_lumb', 'vert_section_initial': 'L'}}
+    for cord_section in cord_section_dct:
+        label_file = os.path.join(path_subject_folder, cord_section_dct[cord_section]['folder_name'], 'label_discs.nii.gz')
+        cord_section_dct[cord_section]['vert_label'] = list(set([label_value for label_value in list(np.unique(Image(label_file).data)) if label_value]))
+
     cord_section_sorted_lst = ['cervical', 'thoracic', 'lumbar'] # sorted from superior to inferior
 
     total_volume_cord_csv_filename = os.path.join(path_results_folder, '_total_volume_cord.csv')
@@ -144,28 +148,28 @@ def run_main(path_data_folder, subject_id, path_results_folder):
                       section_folder_name_lst=[cord_section_dct[section]['folder_name'] for section in cord_section_sorted_lst],
                       output_fname=total_volume_cord_csv_filename)
 
-    # path_subject_result_folder = path_results_folder + subject_id
-    # if not os.path.isdir(path_subject_result_folder):
-    #     os.makedirs(path_subject_result_folder)
+    path_subject_result_folder = path_results_folder + subject_id
+    if not os.path.isdir(path_subject_result_folder):
+        os.makedirs(path_subject_result_folder)
 
-    # metric_dct = {'csa': [0, 100], 'RL_diameter': [0, 30], 'AP_diameter': [0, 20], 'ratio_minor_major': [0, 1]}
-    # shape_pd = pd.DataFrame.from_dict({})
-    # for metric in metric_dct:
-    #     profile_filename = path_subject_result_folder + metric + '_profile.png'
-    #     profile_pd = metric_profile(path_subject=path_subject_folder,
-    #                                     subject_id=subject_id,
-    #                                     vert_info_dct=cord_section_dct,
-    #                                     section_lst=cord_section_sorted_lst,
-    #                                     output_fname=profile_filename,
-    #                                     metric_name=metric,
-    #                                     y_lim_lst=metric_dct[metric])
-    #     if shape_pd.empty:
-    #         shape_pd = profile_pd
-    #     else:
-    #         shape_pd = pd.concat([shape_pd, profile_pd[metric]], axis=1)
+    metric_dct = {'csa': [0, 100], 'RL_diameter': [0, 30], 'AP_diameter': [0, 20], 'ratio_minor_major': [0, 1]}
+    shape_pd = pd.DataFrame.from_dict({})
+    for metric in metric_dct:
+        profile_filename = path_subject_result_folder + metric + '_profile.png'
+        profile_pd = metric_profile(path_subject=path_subject_folder,
+                                        subject_id=subject_id,
+                                        vert_info_dct=cord_section_dct,
+                                        section_lst=cord_section_sorted_lst,
+                                        output_fname=profile_filename,
+                                        metric_name=metric,
+                                        y_lim_lst=metric_dct[metric])
+        if shape_pd.empty:
+            shape_pd = profile_pd
+        else:
+            shape_pd = pd.concat([shape_pd, profile_pd[metric]], axis=1)
 
-    # shape_csv_filename = path_subject_result_folder + '_shape.csv'
-    # shape_pd.to_csv(shape_csv_filename)
+    shape_csv_filename = path_subject_result_folder + '_shape.csv'
+    shape_pd.to_csv(shape_csv_filename)
 
 
 if __name__ == '__main__':
