@@ -3,11 +3,12 @@
 Pipeline for computing cord morphometry measures across the cervical, thoracic and lumbar levels. The following metrics are output:
 - Total spinal cord volume (mm3)
 - CSA profile along the cord (per vertebral level)
-- The anterior-to-posterior and left-to-right diameters per vertebral level 
+- The anterior-to-posterior and left-to-right diameters per vertebral level
+- and other metrics available in [sct_process_segmentation](https://github.com/neuropoly/spinalcordtoolbox/blob/master/scripts/sct_process_segmentation.py)
 
 ## Dependencies
 
-[SCT v3.1.2](https://github.com/neuropoly/spinalcordtoolbox/releases/tag/v3.1.2) or above.
+[SCT v3.2.4](https://github.com/neuropoly/spinalcordtoolbox/releases/tag/v3.2.4) or above.
 
 
 ## File structure
@@ -24,6 +25,8 @@ data
       |- t2_sag_lumb
         |- t2_sag_lumb.nii.gz
 ~~~
+Note: The code is robust to the number of scan available per subject and the vertebral coverage.
+
 
 ## How to run
 
@@ -33,13 +36,17 @@ data
 ~~~
 ./run_process.sh 1_label_data.sh
 ~~~
-- **Process data:** Does most of the processing (automatic). Once completed, check results of the automatic segmentations by opening the quality control (QC) report under `${PATH_QC}/index.html`, and correct the segmentation if needed. To correct a segmentation, open it using e.g. fsleyes, edit the binary mask, then save it by adding the suffix `_manual`. E.g. `t2_seg.nii.gz` --> `t2_seg_manual.nii.gz`.
+- **Segment data:** Does most of the processing (automatic). Once completed, check results of the automatic segmentations by opening the quality control (QC) report under `${PATH_QC}/index.html`, and correct the segmentation if needed. To correct a segmentation, open it using e.g. fsleyes, edit the binary mask, then save it by adding the suffix `_manual`. E.g. `t2_seg.nii.gz` --> `t2_seg_manual.nii.gz`.
 ~~~
-./run_process.sh 2_process_data.sh
+./run_process.sh 2_segment_data.sh
 ~~~
-- **Compute metrics:** Compute the metrics and output results as csv and png images.
+- **Compute metrics:** Compute the metrics.
 ~~~
 ./run_process.sh 3_compute_metrics.sh
+~~~
+- **Extract and Plot the results:** Output results as csv and png images.
+~~~
+./run_process.sh 4_plot_store_values.sh
 ~~~
 
 - The outputs are:
