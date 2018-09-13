@@ -1,0 +1,67 @@
+[
+  {
+    "orientation": "Axial", 
+    "python": "/home/charley/spinalcordtoolbox/python/bin/python", 
+    "cwd": "/home/charley/data/claudia/berlin_claudia_000/01_HWS", 
+    "cmdline": "sct_deepseg_sc -i 01_HWS.nii.gz -c t2 -qc /home/charley/code/claudia/qc/", 
+    "command": "sct_deepseg_sc", 
+    "background_img": "berlin_claudia_000/01_HWS/sct_deepseg_sc/2018_09_12_201035/bkg_img.png", 
+    "moddate": "2018-09-12 20:10:43.056972", 
+    "overlay_img": "berlin_claudia_000/01_HWS/sct_deepseg_sc/2018_09_12_201035/overlay_img.png", 
+    "dimension": "600x600", 
+    "contrast": "01_HWS", 
+    "subject": "berlin_claudia_000"
+  }, 
+  {
+    "orientation": "Axial", 
+    "python": "/home/charley/spinalcordtoolbox/python/bin/python", 
+    "dimension": "600x600", 
+    "cmdline": "sct_deepseg_sc -i 02_BWS.nii.gz -c t2 -qc /home/charley/code/claudia/qc/", 
+    "command": "sct_deepseg_sc", 
+    "background_img": "berlin_claudia_000/02_BWS/sct_deepseg_sc/2018_09_12_201149/bkg_img.png", 
+    "moddate": "2018-09-12 20:11:57.188313", 
+    "subject": "berlin_claudia_000", 
+    "cwd": "/home/charley/data/claudia/berlin_claudia_000/02_BWS", 
+    "contrast": "02_BWS", 
+    "overlay_img": "berlin_claudia_000/02_BWS/sct_deepseg_sc/2018_09_12_201149/overlay_img.png"
+  }, 
+  {
+    "orientation": "Axial", 
+    "python": "/home/charley/spinalcordtoolbox/python/bin/python", 
+    "cwd": "/home/charley/data/claudia/berlin_claudia_001/01_HWS", 
+    "cmdline": "sct_deepseg_sc -i 01_HWS.nii.gz -c t2 -qc /home/charley/code/claudia/qc/", 
+    "command": "sct_deepseg_sc", 
+    "background_img": "berlin_claudia_001/01_HWS/sct_deepseg_sc/2018_09_12_201519/bkg_img.png", 
+    "moddate": "2018-09-12 20:16:04.324221", 
+    "overlay_img": "berlin_claudia_001/01_HWS/sct_deepseg_sc/2018_09_12_201519/overlay_img.png", 
+    "dimension": "600x600", 
+    "contrast": "01_HWS", 
+    "subject": "berlin_claudia_001"
+  }, 
+  {
+    "orientation": "Axial", 
+    "python": "/home/charley/spinalcordtoolbox/python/bin/python", 
+    "dimension": "600x600", 
+    "cmdline": "sct_deepseg_sc -i 02_BWS.nii.gz -c t2 -qc /home/charley/code/claudia/qc/", 
+    "command": "sct_deepseg_sc", 
+    "background_img": "berlin_claudia_001/02_BWS/sct_deepseg_sc/2018_09_12_202419/bkg_img.png", 
+    "moddate": "2018-09-12 20:24:39.211013", 
+    "subject": "berlin_claudia_001", 
+    "cwd": "/home/charley/data/claudia/berlin_claudia_001/02_BWS", 
+    "contrast": "02_BWS", 
+    "overlay_img": "berlin_claudia_001/02_BWS/sct_deepseg_sc/2018_09_12_202419/overlay_img.png"
+  }, 
+  {
+    "orientation": "Axial", 
+    "python": "/home/charley/spinalcordtoolbox/python/bin/python", 
+    "cmdline": "sct_deepseg_sc -i 03_LWS.nii.gz -c t2 -qc /home/charley/code/claudia/qc/", 
+    "moddate": "2018-09-12 20:26:04.750148", 
+    "overlay_img": "berlin_claudia_001/03_LWS/sct_deepseg_sc/2018_09_12_202557/overlay_img.png", 
+    "cwd": "/home/charley/data/claudia/berlin_claudia_001/03_LWS", 
+    "command": "sct_deepseg_sc", 
+    "background_img": "berlin_claudia_001/03_LWS/sct_deepseg_sc/2018_09_12_202557/bkg_img.png", 
+    "subject": "berlin_claudia_001", 
+    "dimension": "600x600", 
+    "contrast": "03_LWS"
+  }
+]
