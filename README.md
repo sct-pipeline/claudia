@@ -52,6 +52,7 @@ Note: The code is robust to the number of scan available per subject and the ver
 - The outputs are:
   - **total_volume_cord.csv**: each row corresponds to a subject
   - **subject_001_folder/**: containing plots (.png) and a csv with the values per slice and vertebral level
+Note: Examples are available in the repository, see folder 'results'.
 
 ## Contributors
 
